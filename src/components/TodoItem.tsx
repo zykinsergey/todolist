@@ -1,6 +1,19 @@
 import { clsx } from "clsx";
+import { Task } from "../types/task";
 
-export function TodoItem({ task, deleteTask, toggleTask }) {
+type TodoItemProps = {
+  task: Task;
+  toggleTask: (id: string) => void;
+  deleteTask: (id: string) => void;
+};
+
+export const TodoItem: React.FC<TodoItemProps> = ({
+  task,
+  deleteTask,
+  toggleTask,
+}) => {
+  const t = 0;
+
   return (
     <div
       className={clsx(
@@ -13,8 +26,9 @@ export function TodoItem({ task, deleteTask, toggleTask }) {
         checked={task.completed}
         onChange={() => toggleTask(task.id)}
       />
+      <span>{task.priority}</span>
       <span className="grow">{task.text}</span>
       <button onClick={() => deleteTask(task.id)}>×</button>
     </div>
   );
-}
+};
